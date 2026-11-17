@@ -12,7 +12,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -73,7 +77,15 @@ public class BadIOGUI {
             new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent ignored) {
-                    IO.println("Read button pressed");
+                    final Path path = Path.of(PATH);
+                    try {
+                        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+                        for (String line : lines) {
+                            System.out.println(line);
+                        }
+                    } catch (final IOException e) {
+                        JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         );
