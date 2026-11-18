@@ -32,7 +32,7 @@ public final class SimpleController implements Controller {
     @Override
     public void printCurrentString() {
         if (this.next == null) {
-            throw new IllegalStateException("The string to print is null");
+            throw new IllegalStateException("No string has been set yet");
         }
         IO.println(this.next);
         this.history.add(this.next);
